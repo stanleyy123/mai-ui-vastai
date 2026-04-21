@@ -2,6 +2,8 @@ FROM pytorch/pytorch:2.4.0-cuda12.4-cudnn9-devel
 
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y --no-install-recommends git curl && rm -rf /var/lib/apt/lists/*
+
 RUN git clone https://github.com/Tongyi-MAI/MAI-UI.git /app/MAI-UI
 
 RUN pip install --no-cache-dir -r /app/MAI-UI/requirements.txt && \
