@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-mkdir -p /workspace/logs
+mkdir -p /workspace/logs /workspace/vllm-cache
 
 # Stage 1: vLLM
 echo "==> [1/3] Starting vLLM (MAI-UI-2B, auto dtype, port 8000)"
@@ -18,6 +18,8 @@ python -m vllm.entrypoints.openai.api_server \
   --max-num-seqs 2 \
   --tensor-parallel-size ${NUM_GPUS} \
   --trust-remote-code \
+  --enforce-eager \
+  --compilation-cache-dir /workspace/vllm-cache \
   --host 0.0.0.0 \
   --port 8000 &
 
