@@ -15,7 +15,7 @@ def get_agent() -> MAIGroundingAgent:
     if _agent is None:
         _agent = MAIGroundingAgent(
             llm_base_url=VLLM_BASE_URL,
-            model_name="MAI-UI-8B",
+            model_name="MAI-UI-2B",
             runtime_conf={"temperature": 0.0, "max_tokens": 2048},
         )
     return _agent

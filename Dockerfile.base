@@ -16,4 +16,4 @@ RUN pip install --no-cache-dir -r /app/MAI-UI/requirements.txt && \
         "vastai"
 
 # Bake model weights into the image — eliminates runtime download (~10–20 min cold start)
-RUN python -c "from huggingface_hub import snapshot_download; snapshot_download('Tongyi-MAI/MAI-UI-8B', local_dir='/app/models/MAI-UI-8B', local_dir_use_symlinks=False)"
+RUN python -c "from huggingface_hub import snapshot_download; snapshot_download('Tongyi-MAI/MAI-UI-2B', local_dir='/app/models/MAI-UI-2B', local_dir_use_symlinks=False)"

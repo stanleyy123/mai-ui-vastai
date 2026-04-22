@@ -4,15 +4,15 @@ set -e
 mkdir -p /workspace/logs
 
 # Stage 1: vLLM
-echo "==> [1/3] Starting vLLM (MAI-UI-8B, bfloat16, port 8000)"
+echo "==> [1/3] Starting vLLM (MAI-UI-2B, auto dtype, port 8000)"
 NUM_GPUS=$(nvidia-smi --list-gpus 2>/dev/null | wc -l)
 NUM_GPUS=${NUM_GPUS:-1}
 echo "==> Detected ${NUM_GPUS} GPU(s)"
 
 python -m vllm.entrypoints.openai.api_server \
-  --model /app/models/MAI-UI-8B \
-  --served-model-name MAI-UI-8B \
-  --dtype bfloat16 \
+  --model /app/models/MAI-UI-2B \
+  --served-model-name MAI-UI-2B \
+  --dtype auto \
   --max-model-len 4096 \
   --gpu-memory-utilization 0.90 \
   --max-num-seqs 2 \
