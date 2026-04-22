@@ -1,10 +1,7 @@
 #!/bin/bash
 set -e
 
-HF_CACHE="${HF_HOME:-/workspace/hf-cache}"
-export HF_HOME="$HF_CACHE"
-export TRANSFORMERS_CACHE="$HF_CACHE"
-mkdir -p "$HF_CACHE" /workspace/logs
+mkdir -p /workspace/logs
 
 # Stage 1: vLLM
 echo "==> [1/3] Starting vLLM (MAI-UI-8B, bfloat16, port 8000)"
@@ -13,7 +10,7 @@ NUM_GPUS=${NUM_GPUS:-1}
 echo "==> Detected ${NUM_GPUS} GPU(s)"
 
 python -m vllm.entrypoints.openai.api_server \
-  --model Tongyi-MAI/MAI-UI-8B \
+  --model /app/models/MAI-UI-8B \
   --served-model-name MAI-UI-8B \
   --dtype bfloat16 \
   --max-model-len 4096 \

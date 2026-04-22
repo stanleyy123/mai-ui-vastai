@@ -13,5 +13,15 @@ RUN pip install --no-cache-dir -r /app/MAI-UI/requirements.txt && \
         "uvicorn[standard]>=0.30" \
         "httpx>=0.27" \
         "python-dotenv>=1.0" \
-        "vastai" && \
-    pip install --no-cache-dir "transformers>=4.49.0" --upgrade
+        "vastai"
+
+# Bake model weights into the image — eliminates runtime download (~10–20 min cold start)
+# local_dir_use_symlinks=False ensures real files land in the image layer, not dangling symlinks
+RUN python -c "
+from huggingface_hub import snapshot_download
+snapshot_download(
+    'Tongyi-MAI/MAI-UI-8B',
+    local_dir='/app/models/MAI-UI-8B',
+    local_dir_use_symlinks=False,
+)
+"
