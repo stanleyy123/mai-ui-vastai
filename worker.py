@@ -1,4 +1,4 @@
-from vastai_sdk import Worker, WorkerConfig, HandlerConfig
+from vastai import Worker, WorkerConfig, HandlerConfig
 
 worker_config = WorkerConfig(
     model_server_url="http://127.0.0.1",
